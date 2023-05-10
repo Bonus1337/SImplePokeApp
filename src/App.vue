@@ -1,28 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <v-btn @click="fetchPokemons">Fetch Pokemon</v-btn>
+    <Pokemon
+      v-for="pokemon in pokemons"
+      :key="pokemon.name"
+      :pokemon="pokemon"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState, mapActions } from "vuex";
+import Pokemon from "./components/Pokemon.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Pokemon,
+  },
+  computed: mapState(["pokemons"]),
+  methods: mapActions(["fetchPokemons"]),
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
